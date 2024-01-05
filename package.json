@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
     "compile": "npx tsc",
-    "dev": "node ./dist/server.js"
+    "start": "node ./dist/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
