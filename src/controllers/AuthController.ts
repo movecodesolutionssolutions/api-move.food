@@ -52,7 +52,7 @@ class AuthController {
   }
 
   async register(req: Request, res: Response): Promise<void> {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, cpf, password, confirmPassword } = req.body;
 
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
@@ -61,6 +61,7 @@ class AuthController {
     const user = new UserModel({
       name,
       email,
+      cpf,
       password: passwordHash,
     });
 
@@ -71,7 +72,7 @@ class AuthController {
     } catch (err) {
       res
         .status(500)
-        .json({ message: "Ocorreu um erro no servidor, tente mais tarde!" });
+        .json({ message: "Ocorreu um erro no servidor, tente mais tarde!", err });
     }
   }
   // async getUser(req: Request, res: Response): Promise<void>{
