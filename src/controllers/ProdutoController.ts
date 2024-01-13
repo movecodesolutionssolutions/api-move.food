@@ -117,6 +117,27 @@ class ProdutoController {
         }
     }
 
+    async getProdutosByEntidade(req: Request, res: Response): Promise<void> {
+        try {
+            const { entidadeId } = req.params;
+
+            // Verificar se a entidade existe
+            const entidade = await EntidadeModel.findById(entidadeId);
+            if (!entidade) {
+                res.status(404).json({ error: "Entidade não encontrada." });
+                return;
+            }
+
+            // Obter todos os produtos da entidade
+            const produtos = await ProdutoModel.find({ "entidade._id": entidadeId }).populate("entidade").populate("tipo_produto");
+
+            res.status(200).json(produtos);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Erro ao obter os produtos da entidade." });
+        }
+    }
+
     async updateProduto(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;

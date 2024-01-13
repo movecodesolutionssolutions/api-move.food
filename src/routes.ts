@@ -122,6 +122,11 @@ Route.get("/produtos/:id", async (req, res) => {
   await ProdutoController.getProdutoById(req, res);
 });
 
+Route.get("/produtos/entidade/:entidadeId", async (req, res) => {
+  await ProdutoController.getProdutosByEntidade(req, res); // Rota para obter todos os produtos de uma entidade
+
+});
+
 Route.put("/produtos/:id", async (req, res) => {
   await ProdutoController.updateProduto(req, res);
 });
