@@ -16,7 +16,7 @@ const EnderecoSchema = new mongoose.Schema<IEndereco>({
     logradouro: { type: String, required: true },
     numero: { type: Number, required: false },
     complemento: { type: String, required: false },
-});
+}, { timestamps: true });
 
 const EnderecoModel: Model<IEndereco> = mongoose.model("Endereco", EnderecoSchema);
 

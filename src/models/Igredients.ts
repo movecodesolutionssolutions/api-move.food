@@ -10,7 +10,7 @@ const IngredientSchema = new mongoose.Schema<IIngredient>({
   name: { type: String, required: true },
   quantity: { type: Number, required: true },
   value: { type: Number, required: true },
-});
+}, { timestamps: true });
 
 const IngredientModel: Model<IIngredient> = mongoose.model(
   "Ingredient",

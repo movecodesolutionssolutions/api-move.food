@@ -36,7 +36,7 @@ const EntidadeSchema = new mongoose.Schema<IEntidade>({
     },
     status: { type: Boolean, required: true },
     telefone: { type: String, required: true },
-});
+}, { timestamps: true });
 
 const EntidadeModel: Model<IEntidade> = mongoose.model("Entidade", EntidadeSchema);
 
