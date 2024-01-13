@@ -5,6 +5,7 @@ import IgredientsController from "./controllers/IgredientsController";
 import UserController from "./controllers/UserController";
 import EntidadeController from "./controllers/EntidadeController";
 import EnderecoController from "./controllers/EnderecoController";
+import TipoProdutoController from "./controllers/TipoProdutoController";
 
 const Route: Router = express.Router();
 
@@ -84,6 +85,27 @@ Route.put("/ingredientes/:id", async (req, res) => {
 
 Route.delete("/ingredientes/:id", async (req, res) => {
   await IgredientsController.deleteIngrediente(req, res);
+});
+
+// Rotas para Tipos de Produto
+Route.post("/tipos-produto", async (req, res) => {
+  await TipoProdutoController.createTipoProduto(req, res);
+});
+
+Route.get("/tipos-produto", async (req, res) => {
+  await TipoProdutoController.getTipoProdutos(req, res);
+});
+
+Route.get("/tipos-produto/:id", async (req, res) => {
+  await TipoProdutoController.getTipoProdutoById(req, res);
+});
+
+Route.put("/tipos-produto/:id", async (req, res) => {
+  await TipoProdutoController.updateTipoProduto(req, res);
+});
+
+Route.delete("/tipos-produto/:id", async (req, res) => {
+  await TipoProdutoController.deleteTipoProduto(req, res);
 });
 
 // Users
