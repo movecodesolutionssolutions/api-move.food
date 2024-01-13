@@ -29,6 +29,10 @@ Route.get("/entidades/:id", async (req, res) => {
   await EntidadeController.getEntidadeById(req, res);
 });
 
+Route.get("/entidades/proprietario/:proprietarioId", async (req, res) => {
+  await EntidadeController.getEntidadesByProprietario(req, res); // rota para obter todas as entidades de um proprietário
+});
+
 Route.put("/entidades/:id", async (req, res) => {
   await EntidadeController.updateEntidade(req, res);
 });
@@ -71,6 +75,9 @@ Route.get("/ingredientes/:id", async (req, res) => {
   await IgredientsController.getIngredienteById(req, res);
 });
 
+Route.get("/ingredientes/entidade/:entidadeId", async (req, res) => {
+  await IgredientsController.getIngredientesByEntidade(req, res); // rota para obter todos os ingredientes de uma entidade
+});
 Route.put("/ingredientes/:id", async (req, res) => {
   await IgredientsController.updateIngrediente(req, res);
 });

@@ -113,6 +113,26 @@ class EntidadeController {
         }
     }
 
+    async getEntidadesByProprietario(req: Request, res: Response): Promise<void> {
+        try {
+            const { proprietarioId } = req.params;
+
+            // Validar proprietarioId
+            if (!proprietarioId || typeof proprietarioId !== "string") {
+                res.status(400).json({ error: "O parâmetro 'proprietarioId' é obrigatório e deve ser uma string." });
+                return;
+            }
+
+            // Obter todas as entidades do proprietário
+            const entidades = await EntidadeModel.find({ "proprietario._id": proprietarioId });
+
+            res.status(200).json(entidades);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Erro ao obter as entidades do proprietário." });
+        }
+    }
+
     async updateEntidade(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;

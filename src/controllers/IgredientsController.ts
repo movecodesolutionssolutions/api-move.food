@@ -84,6 +84,25 @@ class IngredientesController {
     }
   }
 
+  async getIngredientesByEntidade(req: Request, res: Response): Promise<void> {
+    try {
+      const {entidadeId} = req.params;
+
+      // Validar entidadeId
+      if (!entidadeId || typeof entidadeId !== "string") {
+        res.status(400).json({error: "O parâmetro 'entidadeId' é obrigatório e deve ser uma string."});
+        return;
+      }
+
+      // Obter todos os ingredientes da entidade
+      const ingredientes = await IngredienteModel.find({"entidade._id": entidadeId});
+
+      res.status(200).json(ingredientes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({error: "Erro ao obter os ingredientes da entidade."});
+    }
+  }
   async updateIngrediente(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
