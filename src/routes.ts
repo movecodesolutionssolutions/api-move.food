@@ -134,6 +134,10 @@ Route.post("/produtos/:id/remover-ingrediente", async (req, res) => {
   await ProdutoController.removerIngrediente(req, res);
 });
 
+Route.get("/produtos/:id/ingredientes", async (req, res) => {
+  await ProdutoController.getIngredientesDoProduto(req, res);
+});
+
 Route.put("/produtos/:id", async (req, res) => {
   await ProdutoController.updateProduto(req, res);
 });

@@ -217,6 +217,27 @@ class ProdutoController {
         }
     }
 
+    async getIngredientesDoProduto(req: Request, res: Response): Promise<void> {
+        try {
+            const { id: produtoId } = req.params;
+
+            // Verificar se o produto existe
+            const produto = await ProdutoModel.findById(produtoId);
+            if (!produto) {
+                res.status(404).json({ error: "Produto não encontrado." });
+                return;
+            }
+
+            // Obter todos os ingredientes do produto
+            const ingredientesDoProduto = await IngredienteModel.find({ _id: { $in: produto.ingredientes.map(ingrediente => ingrediente._id) } });
+
+            res.status(200).json(ingredientesDoProduto);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Erro ao obter os ingredientes do produto." });
+        }
+    }
+
     async updateProduto(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
