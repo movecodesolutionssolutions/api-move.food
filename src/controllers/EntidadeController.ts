@@ -7,10 +7,34 @@ class EntidadeController {
         try {
             const { nome, proprietario_id, status, telefone } = req.body;
 
+            // Validate nome
+            if (!nome || typeof nome !== "string") {
+                res.status(400).json({ error: "O campo 'nome' é obrigatório e deve ser uma string." });
+                return;
+            }
+
+            // Validate proprietario_id
+            if (!proprietario_id || typeof proprietario_id !== "string") {
+                res.status(400).json({ error: "O campo 'proprietario_id' é obrigatório e deve ser uma string." });
+                return;
+            }
+
             // Verificar se o usuário proprietário existe
             const proprietario = await UserModel.findById(proprietario_id);
             if (!proprietario) {
                 res.status(404).json({ error: "Usuário proprietário não encontrado." });
+                return;
+            }
+
+            // Validate status
+            if (status === undefined || typeof status !== "boolean") {
+                res.status(400).json({ error: "O campo 'status' é obrigatório e deve ser um valor booleano." });
+                return;
+            }
+
+            // Validate telefone
+            if (!telefone || typeof telefone !== "string") {
+                res.status(400).json({ error: "O campo 'telefone' é obrigatório e deve ser uma string." });
                 return;
             }
 
