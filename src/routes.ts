@@ -25,6 +25,18 @@ Route.get("/entidades", async (req, res) => {
   await EntidadeController.getAllEntidades(req, res);
 });
 
+Route.get("/entidades/:id", async (req, res) => {
+  await EntidadeController.getEntidadeById(req, res);
+});
+
+Route.put("/entidades/:id", async (req, res) => {
+  await EntidadeController.updateEntidade(req, res);
+});
+
+Route.delete("/entidades/:id", async (req, res) => {
+  await EntidadeController.deleteEntidade(req, res);
+});
+
 // Rotas para Enderecos
 Route.post("/enderecos", async (req, res) => {
   await EnderecoController.createEndereco(req, res);
