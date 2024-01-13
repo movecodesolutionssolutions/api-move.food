@@ -6,6 +6,7 @@ import UserController from "./controllers/UserController";
 import EntidadeController from "./controllers/EntidadeController";
 import EnderecoController from "./controllers/EnderecoController";
 import TipoProdutoController from "./controllers/TipoProdutoController";
+import ProdutoController from "./controllers/ProdutoController";
 
 const Route: Router = express.Router();
 
@@ -106,6 +107,27 @@ Route.put("/tipos-produto/:id", async (req, res) => {
 
 Route.delete("/tipos-produto/:id", async (req, res) => {
   await TipoProdutoController.deleteTipoProduto(req, res);
+});
+
+// Rotas para Produtos
+Route.post("/produtos", async (req, res) => {
+  await ProdutoController.createProduto(req, res);
+});
+
+Route.get("/produtos", async (req, res) => {
+  await ProdutoController.getProdutos(req, res);
+});
+
+Route.get("/produtos/:id", async (req, res) => {
+  await ProdutoController.getProdutoById(req, res);
+});
+
+Route.put("/produtos/:id", async (req, res) => {
+  await ProdutoController.updateProduto(req, res);
+});
+
+Route.delete("/produtos/:id", async (req, res) => {
+  await ProdutoController.deleteProduto(req, res);
 });
 
 // Users
