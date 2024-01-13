@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ProdutoModel, { IProduto } from "../models/Produto";
 import EntidadeModel from "../models/Entidade";
 import TipoProdutoModel from "../models/TipoProduto";
+import IngredienteModel, { IIngrediente } from "../models/Igredients";
 
 class ProdutoController {
     async createProduto(req: Request, res: Response): Promise<void> {
@@ -135,6 +136,84 @@ class ProdutoController {
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Erro ao obter os produtos da entidade." });
+        }
+    }
+
+    async adicionarIngredientes(req: Request, res: Response): Promise<void> {
+        try {
+            const { id: produtoId } = req.params;
+            const { ingredientes } = req.body;
+
+            // Verificar se o produto existe
+            const produto = await ProdutoModel.findById(produtoId);
+            if (!produto) {
+                res.status(404).json({ error: "Produto não encontrado." });
+                return;
+            }
+
+            // Verificar se os ingredientes existem
+            const ingredientesExistentes = await IngredienteModel.find({ _id: { $in: ingredientes } });
+            if (ingredientesExistentes.length !== ingredientes.length) {
+                res.status(404).json({ error: "Um ou mais ingredientes não encontrados." });
+                return;
+            }
+
+            // Mapear os IDs dos ingredientes para objetos com as propriedades necessárias
+            const ingredientesParaAdicionar: Array<{ _id: any; nome: string }> = ingredientesExistentes.map(ingrediente => ({
+                _id: ingrediente._id,
+                nome: ingrediente.nome,
+            }));
+
+            // Verificar se os ingredientes já existem no produto
+            ingredientesParaAdicionar.forEach((ingredienteAdicionar) => {
+                const ingredienteExistente = produto.ingredientes.find((ingrediente) => ingrediente._id.toString() === ingredienteAdicionar._id.toString());
+
+                if (ingredienteExistente) {
+                    // Se o ingrediente já existe, remova-o da lista para evitar duplicatas
+                    const index = produto.ingredientes.indexOf(ingredienteExistente);
+                    produto.ingredientes.splice(index, 1);
+                }
+
+                // Adicionar ingredientes ao produto
+                produto.ingredientes.push(ingredienteAdicionar);
+            });
+
+            await produto.save();
+
+            res.status(200).json(produto);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Erro ao adicionar ingredientes ao produto." });
+        }
+    }
+
+    async removerIngrediente(req: Request, res: Response): Promise<void> {
+        try {
+            const { id: produtoId } = req.params;
+            const { ingredienteId } = req.body;
+
+            // Verificar se o produto existe
+            const produto = await ProdutoModel.findById(produtoId);
+            if (!produto) {
+                res.status(404).json({ error: "Produto não encontrado." });
+                return;
+            }
+
+            // Verificar se o ingrediente existe no produto
+            const indexIngrediente = produto.ingredientes.findIndex(ingrediente => ingrediente._id.toString() === ingredienteId);
+            if (indexIngrediente === -1) {
+                res.status(404).json({ error: "Ingrediente não encontrado no produto." });
+                return;
+            }
+
+            // Remover o ingrediente do array
+            produto.ingredientes.splice(indexIngrediente, 1);
+            await produto.save();
+
+            res.status(200).json(produto);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Erro ao remover ingrediente do produto." });
         }
     }
 

@@ -124,7 +124,14 @@ Route.get("/produtos/:id", async (req, res) => {
 
 Route.get("/produtos/entidade/:entidadeId", async (req, res) => {
   await ProdutoController.getProdutosByEntidade(req, res); // Rota para obter todos os produtos de uma entidade
+});
 
+Route.post("/produtos/:id/ingredientes", async (req, res) => {
+  await ProdutoController.adicionarIngredientes(req, res);
+});
+
+Route.post("/produtos/:id/remover-ingrediente", async (req, res) => {
+  await ProdutoController.removerIngrediente(req, res);
 });
 
 Route.put("/produtos/:id", async (req, res) => {
