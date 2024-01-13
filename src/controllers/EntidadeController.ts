@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import EntidadeModel, { IEntidade } from "../models/Entidade";
 import UserModel from "../models/User";
+import EnderecoModel from "../models/Endereco";
 
 class EntidadeController {
     async createEntidade(req: Request, res: Response): Promise<void> {
         try {
-            const { nome, proprietario_id, status, telefone } = req.body;
+            const { nome, proprietario_id, endereco_id, status, telefone } = req.body;
 
             // Validate nome
             if (!nome || typeof nome !== "string") {
@@ -19,10 +20,23 @@ class EntidadeController {
                 return;
             }
 
+            // Validate endereco_id
+            if (!endereco_id || typeof endereco_id !== "string") {
+                res.status(400).json({ error: "O campo 'endereco_id' é obrigatório e deve ser uma string." });
+                return;
+            }
+
             // Verificar se o usuário proprietário existe
             const proprietario = await UserModel.findById(proprietario_id);
             if (!proprietario) {
                 res.status(404).json({ error: "Usuário proprietário não encontrado." });
+                return;
+            }
+
+            // Verificar se o endereço existe
+            const endereco = await EnderecoModel.findById(endereco_id);
+            if (!endereco) {
+                res.status(404).json({ error: "Endereço não encontrado." });
                 return;
             }
 
@@ -46,6 +60,16 @@ class EntidadeController {
                     email: proprietario.email,
                     cpf: proprietario.cpf,
                     // Adicione outros campos do usuário que desejar
+                },
+
+                endereco: {
+                    _id: endereco._id,
+                    uf: endereco.uf,
+                    cidade: endereco.cidade,
+                    bairro: endereco.bairro,
+                    logradouro: endereco.logradouro,
+                    numero: endereco.numero,
+                    complemento: endereco.complemento,
                 },
                 status,
                 telefone,

@@ -1,9 +1,11 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { IUser } from "./User"; // Importando o modelo de usuário
+import { IEndereco } from "./Endereco"; // Importando o modelo de usuário
 
 export interface IEntidade extends Document {
     nome: string;
     proprietario: IUser["_id"];
+    endereco: IEndereco["_id"];
     status: Boolean;
     telefone: String;
     // endereco_id: number;
@@ -17,7 +19,18 @@ const EntidadeSchema = new mongoose.Schema<IEntidade>({
             name: { type: String },
             email: { type: String },
             cpf: { type: String },
-            // Adicione outros campos do usuário que desejar
+        }),
+        required: true,
+    },
+    endereco: {
+        type: new mongoose.Schema<IEndereco>({
+            _id: { type: Schema.Types.ObjectId, ref: "Endereco", required: true },
+            uf: { type: String },
+            cidade: { type: String },
+            bairro: { type: String },
+            logradouro: { type: String },
+            numero: { type: Number },
+            complemento: { type: String },
         }),
         required: true,
     },
