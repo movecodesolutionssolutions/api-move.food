@@ -4,7 +4,7 @@ import authController from "./controllers/AuthController";
 import IgredientsController from "./controllers/IgredientsController";
 import UserController from "./controllers/UserController";
 import EntidadeController from "./controllers/EntidadeController";
-import EnderecoController from "./controllers/EnderecoController"; // Import the EnderecoController
+import EnderecoController from "./controllers/EnderecoController";
 
 const Route: Router = express.Router();
 
@@ -58,11 +58,28 @@ Route.delete("/enderecos/:id", async (req, res) => {
   await EnderecoController.deleteEndereco(req, res);
 });
 
-// Igredients
-Route.post("/igredients", async (req, res) => {
-  await IgredientsController.post(req, res);
+// Rotas para Ingredientes
+Route.post("/ingredientes", async (req, res) => {
+  await IgredientsController.createIngrediente(req, res);
 });
 
+Route.get("/ingredientes", async (req, res) => {
+  await IgredientsController.getAllIngredientes(req, res);
+});
+
+Route.get("/ingredientes/:id", async (req, res) => {
+  await IgredientsController.getIngredienteById(req, res);
+});
+
+Route.put("/ingredientes/:id", async (req, res) => {
+  await IgredientsController.updateIngrediente(req, res);
+});
+
+Route.delete("/ingredientes/:id", async (req, res) => {
+  await IgredientsController.deleteIngrediente(req, res);
+});
+
+// Users
 Route.get("/users", async (req, res) => {
   await UserController.get(req, res);
 });

@@ -118,7 +118,7 @@ class EntidadeController {
             const { id } = req.params;
             const { nome, status, telefone, proprietario_id, endereco_id } = req.body;
 
-// Validate nome
+            // Validate nome
             if (!nome || typeof nome !== "string") {
                 res.status(400).json({ error: "O campo 'nome' é obrigatório e deve ser uma string." });
                 return;
