@@ -4,6 +4,7 @@ import authController from "./controllers/AuthController";
 import IgredientsController from "./controllers/IgredientsController";
 import UserController from "./controllers/UserController";
 import EntidadeController from "./controllers/EntidadeController";
+import EnderecoController from "./controllers/EnderecoController"; // Import the EnderecoController
 
 const Route: Router = express.Router();
 
@@ -21,11 +22,31 @@ Route.post("/entidades", async (req, res) => {
 });
 
 Route.get("/entidades", async (req, res) => {
-  // Adicione a lógica para obter todas as entidades
   await EntidadeController.getAllEntidades(req, res);
 });
 
-//Igredients
+// Rotas para Enderecos
+Route.post("/enderecos", async (req, res) => {
+  await EnderecoController.createEndereco(req, res);
+});
+
+Route.get("/enderecos", async (req, res) => {
+  await EnderecoController.getEnderecos(req, res);
+});
+
+Route.get("/enderecos/:id", async (req, res) => {
+  await EnderecoController.getEnderecoById(req, res);
+});
+
+Route.put("/enderecos/:id", async (req, res) => {
+  await EnderecoController.updateEndereco(req, res);
+});
+
+Route.delete("/enderecos/:id", async (req, res) => {
+  await EnderecoController.deleteEndereco(req, res);
+});
+
+// Igredients
 Route.post("/igredients", async (req, res) => {
   await IgredientsController.post(req, res);
 });
