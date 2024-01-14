@@ -1,0 +1,450 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API MoveFood",
+    "description": "API do back-end da aplicação MoveFood, desenvolvido por Movecode Solutions",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-movefood-production.up.railway.app",
+      "description": "API de Produção"
+    }
+  ],
+  "paths" : {
+    "/entidades": {
+      "post": {
+        "sumary": "Cadastro de Entidade",
+        "description": "Essa rota cadastra uma nova entidade",
+        "tags": [
+          "Entidades"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entidade"
+              },
+              "example": {
+                "nome": "Pizzaria Boa Vista",
+                "proprietario_id": "657afc24357cd7c0530bb36b",
+                "endereco_id": "657sfc34357cd7c0930bb36l",
+                "status": true,
+                "telefone": "(68) 9983-3499"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Entidade já existe"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entidade"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enderecos": {
+      "post": {
+        "sumary": "Cadastro de Endereco",
+        "description": "Essa rota cadastra um novo endereco",
+        "tags": [
+          "Endereco"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Endereco"
+              },
+              "example": {
+                "uf": "Acre",
+                "cidade": "Rio Branco",
+                "bairro": "Centro",
+                "logradouro": "Rua 6 de Agosto",
+                "numero": 32,
+                "complemento": "Predio"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Endereço já existe"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Endereco"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingredientes": {
+      "post": {
+        "sumary": "Cadastro de Ingredientes",
+        "description": "Essa rota cadastra um novo ingrediente",
+        "tags": [
+          "Ingrediente"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ingrediente"
+              },
+              "example": {
+                "nome": "Queijo",
+                "entidade_id": "657sfc34657cs7c4930nb36l",
+                "qtd_estoque": 50,
+                "status": true
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Ingrediente já existe"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Ingrediente"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tipos-produto": {
+      "post": {
+        "sumary": "Cadastro de Tipo de Produto",
+        "description": "Essa rota cadastra um novo tipo de produto",
+        "tags": [
+          "Tipo de Produto"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProduto"
+              },
+              "example": {
+                "nome": "Pizzas",
+                "entidade_id": "657sfc34757gs7c8933nb36l"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Tipo de produto já existe"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/TipoProduto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos": {
+      "post": {
+        "sumary": "Cadastro de Produto",
+        "description": "Essa rota cadastra um novo produto",
+        "tags": [
+          "Produto"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              },
+              "example": {
+                "nome": "Pizza de Calabresa",
+                "qtd_estoque": 25,
+                "entidade_id": "657sfc34757gs7c8933nb36l",
+                "descricao": "Deliciosa pizza de calabresa tamanho família",
+                "preco": "50,00",
+                "status": true,
+                "tipo_produto_id": "657ofc31755gs7f8923nb36l"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Produto já existe"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Produto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/{produtoId}/ingredientes": {
+      "post": {
+        "sumary": "Cadastro de Ingrediente(s) em Produto",
+        "description": "Essa rota cadastra um ou mais ingredientes em produto",
+        "tags": [
+          "Produto"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoAddIngrediente"
+              },
+              "example": {
+                "ingredientes": ["057ofc31755gs7f2923nb36z", "557ofc31754gs7f8923nb32g"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Ingrediente já adicionado a este produto"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ProdutoAddIngrediente"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/{produtoId}/remover-ingrediente": {
+      "post": {
+        "sumary": "Remover Ingrediente de Produto",
+        "description": "Essa rota remove um ingrediente de produto",
+        "tags": [
+          "Produto"
+        ],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveIngredienteProduto"
+              },
+              "example": {
+                "ingredienteId": "057ofc31755gs7f2923nb36z"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/RemoveIngredienteProduto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Entidade": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "proprietario_id": {
+            "type": "string"
+          },
+          "endereco_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "telefone": {
+            "type": "string"
+          }
+        }
+      },
+      "Endereco": {
+        "type": "object",
+        "properties": {
+          "uf": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          },
+          "logradouro": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "number"
+          },
+          "complemento": {
+            "type": "string"
+          }
+        }
+      },
+      "Ingrediente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "entidade_id": {
+            "type": "string"
+          },
+          "qtd_estoque": {
+            "type": "number"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TipoProduto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "entidade_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "qtd_estoque": {
+            "type": "number"
+          },
+          "entidade_id": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "tipo_produto": {
+            "type": "string"
+          }
+        }
+      },
+      "ProdutoAddIngrediente": {
+        "type": "object",
+        "properties": {
+          "ingredientes": {
+            "type": "array"
+          }
+        }
+      },
+      "RemoveIngredienteProduto": {
+        "type": "object",
+        "properties": {
+          "ingredienteId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
