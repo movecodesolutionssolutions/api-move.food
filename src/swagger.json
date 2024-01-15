@@ -13,6 +13,28 @@
   ],
   "paths" : {
     "/entidades": {
+      "get": {
+        "description": "Listar todos as entidades",
+        "summary": "Essa rota lista todas as entidades",
+        "tags": ["Entidades"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+
       "post": {
         "sumary": "Cadastro de Entidade",
         "description": "Essa rota cadastra uma nova entidade",
@@ -59,6 +81,27 @@
       }
     },
     "/enderecos": {
+      "get": {
+        "description": "Listar todos os endereços",
+        "summary": "Essa rota lista todos os endereços",
+        "tags": ["Endereco"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "sumary": "Cadastro de Endereco",
         "description": "Essa rota cadastra um novo endereco",
@@ -106,6 +149,27 @@
       }
     },
     "/ingredientes": {
+      "get": {
+        "description": "Listar todos os ingredientes",
+        "summary": "Essa rota lista todos os ingredientes",
+        "tags": ["Ingrediente"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "sumary": "Cadastro de Ingredientes",
         "description": "Essa rota cadastra um novo ingrediente",
@@ -151,6 +215,27 @@
       }
     },
     "/tipos-produto": {
+      "get": {
+        "description": "Listar todos os tipos de produto",
+        "summary": "Essa rota lista todos os tipos de produto",
+        "tags": ["Tipo de Produto"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "sumary": "Cadastro de Tipo de Produto",
         "description": "Essa rota cadastra um novo tipo de produto",
@@ -194,6 +279,27 @@
       }
     },
     "/produtos": {
+      "get": {
+        "description": "Listar todos os produtos",
+        "summary": "Essa rota lista todos os produtos",
+        "tags": ["Produto"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "sumary": "Cadastro de Produto",
         "description": "Essa rota cadastra um novo produto",
