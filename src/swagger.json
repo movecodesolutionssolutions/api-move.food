@@ -249,6 +249,17 @@
           "Produto"
         ],
         "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "produtoId",
+            "in": "path",
+            "required": true,
+            "description": "ID do Produto",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -291,6 +302,17 @@
           "Produto"
         ],
         "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "produtoId",
+            "in": "path",
+            "required": true,
+            "description": "ID do Produto",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
